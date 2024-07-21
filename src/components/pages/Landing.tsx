@@ -4,7 +4,7 @@ import clsx from 'clsx';
 
 import { FormGenerator } from '@homework-task/components/tasks/FormGenerator';
 import { PageGenerator } from '@homework-task/components/tasks/PageGenerator';
-import { UsersList } from '@homework-task/components/tasks/UserList';
+import { UsersList } from '@homework-task/components/tasks/UsersList';
 import { pageArray } from '@homework-task/constants/pageArray';
 import { User } from '@homework-task/types/user';
 

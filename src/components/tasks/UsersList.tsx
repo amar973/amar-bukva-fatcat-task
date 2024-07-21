@@ -24,16 +24,7 @@ export const UsersList = ({ users, error, loading }: UsersListProps) => {
             )}
         >
             {loading ? (
-                <div
-                    className={clsx(
-                        'w-full',
-                        'flex',
-                        'justify-center',
-                        'items-center'
-                    )}
-                >
-                    <Loader fillColor="black" size="50" />
-                </div>
+                <Loader fillColor="black" size="50" />
             ) : error || users?.length === 0 ? (
                 <ErrorPage
                     error={error ? 'Error fetching user' : 'No users found'}

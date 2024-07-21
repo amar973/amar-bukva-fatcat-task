@@ -2,9 +2,9 @@ import React from 'react';
 
 import clsx from 'clsx';
 
-import { Hero } from '@homework-task/components/pageGeneratorComponent/Hero';
-import { ItemsShowcase } from '@homework-task/components/pageGeneratorComponent/ItemsShowcase';
-import { TrustBar } from '@homework-task/components/pageGeneratorComponent/TrustBar';
+import { Hero } from '@homework-task/components/pageGenerator/Hero';
+import { ItemsShowcase } from '@homework-task/components/pageGenerator/ItemsShowcase';
+import { TrustBar } from '@homework-task/components/pageGenerator/TrustBar';
 import {
     HeroProps,
     ItemsShowcaseProps,

@@ -13,7 +13,8 @@ export const ErrorPage = ({ error }: ErrorPageProps) => {
                 'w-full',
                 'flex',
                 'justify-center',
-                'items-center'
+                'items-center',
+                'bg-cream'
             )}
         >
             <p
