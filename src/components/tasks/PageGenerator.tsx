@@ -4,12 +4,14 @@ import clsx from 'clsx';
 
 import { Hero } from '@homework-task/components/pageGenerator/Hero';
 import { ItemsShowcase } from '@homework-task/components/pageGenerator/ItemsShowcase';
+import { PanelShowcase } from '@homework-task/components/pageGenerator/PanelShowcase';
 import { TrustBar } from '@homework-task/components/pageGenerator/TrustBar';
 import {
     HeroProps,
     ItemsShowcaseProps,
     PageGeneratorProps,
     TrustBarProps,
+    PanelShowcaseProps,
 } from '@homework-task/types/pageGenerator';
 
 export const PageGenerator: React.FC<PageGeneratorProps> = ({ data }) => {
@@ -53,6 +55,13 @@ export const PageGenerator: React.FC<PageGeneratorProps> = ({ data }) => {
                                     <TrustBar
                                         key={componentIndex}
                                         {...(component.props as TrustBarProps)}
+                                    />
+                                );
+                            case 'componentPanelShowcase':
+                                return (
+                                    <PanelShowcase
+                                        key={componentIndex}
+                                        {...(component.props as PanelShowcaseProps)}
                                     />
                                 );
                             default:

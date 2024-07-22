@@ -10,7 +10,9 @@ export const PanelShowcase = ({ items }: PanelShowcaseProps) => {
             <div
                 className={clsx(
                     'grid',
-                    'grid-cols-3',
+                    'grid-cols-1',
+                    'sm:grid-cols-2',
+                    'md:grid-cols-3',
                     'gap-8',
                     'w-8/12',
                     'justify-center',

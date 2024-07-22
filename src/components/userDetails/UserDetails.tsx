@@ -1,6 +1,7 @@
 import clsx from 'clsx';
 import { useNavigate } from 'react-router-dom';
 
+import { ObjectDetails } from '@homework-task/components/ui/ObjectDetails';
 import { User } from '@homework-task/types/user';
 
 interface UserDetailsProps {
@@ -40,64 +41,49 @@ export const UserDetails = ({ user }: UserDetailsProps) => {
             <h1 className={clsx('text-2xl', 'font-bold', 'mb-4')}>
                 User Details
             </h1>
-            <p>
-                <strong>ID:</strong> {user.id}
-            </p>
-            <p>
-                <strong>Name:</strong> {user.name}
-            </p>
-            <p>
-                <strong>Username:</strong> {user.username}
-            </p>
-            <p>
-                <strong>Email:</strong> {user.email}
-            </p>
-            <p>
-                <strong>Phone:</strong> {user.phone}
-            </p>
-            <p>
-                <strong>Website:</strong>{' '}
-                <a
-                    href={`http://${user.website}`}
-                    className="text-primary"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
-                    {user.website}
-                </a>
-            </p>
             <div>
-                <h2 className={clsx('text-lg', 'font-semibold')}>Address</h2>
+                <ObjectDetails
+                    data={{
+                        id: String(user.id),
+                        name: user.name,
+                        username: user.username,
+                        email: user.email,
+                        phone: user.phone,
+                    }}
+                />
                 <p>
-                    <strong>Street:</strong> {user.address.street}
-                </p>
-                <p>
-                    <strong>Suite:</strong> {user.address.suite}
-                </p>
-                <p>
-                    <strong>City:</strong> {user.address.city}
-                </p>
-                <p>
-                    <strong>Zipcode:</strong> {user.address.zipCode}
-                </p>
-                <p>
-                    <strong>Latitude:</strong> {user.address.geo.lat}
-                </p>
-                <p>
-                    <strong>Longitude:</strong> {user.address.geo.lng}
+                    <strong>Website:</strong>{' '}
+                    <a
+                        href={`http://${user.website}`}
+                        className="text-primary"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        {user.website}
+                    </a>
                 </p>
             </div>
             <div>
+                <h2 className={clsx('text-lg', 'font-semibold')}>Address</h2>
+                <ObjectDetails
+                    data={{
+                        street: user.address.street,
+                        suite: user.address.suite,
+                        city: user.address.city,
+                        latitude: user.address.geo.lat,
+                        Longitude: user.address.geo.lng,
+                    }}
+                />
+            </div>
+            <div>
                 <h2 className={clsx('text-lg', 'font-semibold')}>Company</h2>
-                <p>
-                    <strong>Name:</strong> {user.company.name}
-                </p>
-                <p>
-                    <strong>Catchphrase:</strong> {user.company.catchPhrase}
-                </p>
-                <p>
-                    <strong>BS:</strong> {user.company.bs}
-                </p>
+                <ObjectDetails
+                    data={{
+                        company: user.company.name,
+                        catchphrase: user.company.catchPhrase,
+                        BS: user.company.bs,
+                    }}
+                />
             </div>
         </div>
     );

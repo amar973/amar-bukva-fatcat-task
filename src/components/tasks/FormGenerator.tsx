@@ -1,83 +1,43 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import clsx from 'clsx';
 import { useForm, FieldValues } from 'react-hook-form';
-import { useMutation } from 'react-query';
+import { UseMutationResult } from 'react-query';
 import { z as zod } from 'zod';
 
 import { Button } from '@homework-task/components/formElements/Button';
-import { CustomInput } from '@homework-task/components/formElements/CustomInput';
-import { CustomTextarea } from '@homework-task/components/formElements/CustomTextarea';
-import {
-    ToastHelper,
-    ToastMessageType,
-    ToastType,
-} from '@homework-task/helper/toast';
 
-const Schema = zod.object({
-    title: zod
-        .string()
-        .max(50, 'Title must be 50 characters or less')
-        .min(1, 'Title is required'),
-    body: zod
-        .string()
-        .max(500, 'Body must be 500 characters or less')
-        .min(1, 'Body is required'),
-});
+type FormGeneratorProps<T extends FieldValues> = {
+    validationSchema: zod.ZodSchema<T>;
+    useMutation: UseMutationResult<Response, Error, FieldValues, unknown>;
+    renderForm: (args: {
+        register: ReturnType<typeof useForm<T>>['register'];
+        errors: ReturnType<typeof useForm<T>>['formState']['errors'];
+    }) => React.ReactNode;
+};
 
-type FormSchemaType = zod.infer<typeof Schema>;
-
-export const FormGenerator: React.FC = () => {
+export const FormGenerator = <T extends FieldValues>({
+    validationSchema,
+    useMutation,
+    renderForm,
+}: FormGeneratorProps<T>) => {
     const {
         register,
         handleSubmit,
         formState: { errors },
-        reset,
-    } = useForm<FormSchemaType>({
-        resolver: zodResolver(Schema),
+    } = useForm<T>({
+        resolver: zodResolver(validationSchema),
         mode: 'all',
     });
 
-    const updateTaxRateData = useMutation({
-        mutationFn: (data: FieldValues) =>
-            fetch('https://jsonplaceholder.typicode.com/posts', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(data),
-            }),
-        onSuccess: () => {
-            ToastHelper.showToast(
-                'Element',
-                ToastType.SUCCESS,
-                ToastMessageType.CREATE
-            );
-            reset({
-                title: '',
-                body: '',
-            });
-        },
-        onError: (err: Error) => {
-            ToastHelper.showToast(
-                err.message,
-                ToastType.ERROR,
-                ToastMessageType.ERROR
-            );
-        },
-    });
-    const onSubmit = (data: FieldValues) => {
-        updateTaxRateData.mutate(data);
-    };
-
-    const handleClick = async () => {
-        await handleSubmit(onSubmit)();
+    const onSubmit = (data: T) => {
+        useMutation.mutate(data);
     };
 
     return (
         <section
             className={clsx(
                 'place-content-center',
-                'bg-lightBlue',
+                'bg-gray10',
                 'flex',
                 'flex-col',
                 'items-center',
@@ -106,26 +66,16 @@ export const FormGenerator: React.FC = () => {
                     'md:gap-2',
                     'p-4',
                     'md:p-8',
-                    'bg-lightGray',
+                    'bg-gray5',
                     'w-full',
                     'max-w-[600px]'
                 )}
             >
-                <CustomInput
-                    id="title"
-                    label="Title"
-                    className="w-full"
-                    {...register('title')}
-                    error={errors['title']?.message}
-                />
-                <CustomTextarea
-                    id="body"
-                    label="Body"
-                    type="textarea"
-                    {...register('body')}
-                    error={errors['body']?.message}
-                />
-                <Button className="w-50" onClick={() => void handleClick()}>
+                {renderForm({ register, errors })}
+                <Button
+                    className={clsx('w-50')}
+                    onClick={() => void handleSubmit(onSubmit)()}
+                >
                     Submit
                 </Button>
             </div>

@@ -1,5 +1,6 @@
 import clsx from 'clsx';
 
+import { ObjectDetails } from '@homework-task/components/ui/ObjectDetails';
 import { User } from '@homework-task/types/user';
 
 interface UserProps {
@@ -14,7 +15,7 @@ export const UserCard = ({ user }: UserProps) => {
                 'flex-col',
                 'gap-4',
                 'p-4',
-                'bg-cream',
+                'bg-gray5',
                 'py-6',
                 'px-2',
                 'sm:px-3',
@@ -33,21 +34,14 @@ export const UserCard = ({ user }: UserProps) => {
             >
                 {user.name}
             </h2>
-            <p className={clsx('text-gray80', 'text-base', 'leading-relaxed')}>
-                <strong>ID:</strong> {user.id}
-            </p>
-            <p className={clsx('text-gray80', 'text-base', 'leading-relaxed')}>
-                <strong>Name:</strong> {user.name}
-            </p>
-            <p className={clsx('text-gray80', 'text-base', 'leading-relaxed')}>
-                <strong>Email:</strong> {user.email}
-            </p>
-            <p className={clsx('text-gray80', 'text-base', 'leading-relaxed')}>
-                <strong>Username:</strong> {user.username}
-            </p>
-            <p className={clsx('text-gray80', 'text-base', 'leading-relaxed')}>
-                <strong>Phone:</strong> {user.phone}
-            </p>
+            <ObjectDetails
+                data={{
+                    id: String(user.id),
+                    username: user.username,
+                    email: user.email,
+                    phone: user.phone,
+                }}
+            />
             <a
                 href={`user/${user.id}`}
                 className={clsx(

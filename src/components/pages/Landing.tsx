@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 
 import clsx from 'clsx';
 
-import { FormGenerator } from '@homework-task/components/tasks/FormGenerator';
+import { Form } from '@homework-task/components/tasks/Form';
 import { PageGenerator } from '@homework-task/components/tasks/PageGenerator';
 import { UsersList } from '@homework-task/components/tasks/UsersList';
 import { pageArray } from '@homework-task/constants/pageArray';
@@ -52,7 +52,7 @@ export const Landing = () => {
                 </h1>
             </div>
             <UsersList users={users} loading={loading} error={error} />
-            <FormGenerator />
+            <Form />
             <PageGenerator data={pageArray} />
         </section>
     );

@@ -3,7 +3,11 @@ interface LayoutProps {
 }
 
 interface ComponentProps {
-    type: 'componentHero' | 'componentItemsShowcase' | 'componentTrustBar';
+    type:
+        | 'componentHero'
+        | 'componentItemsShowcase'
+        | 'componentTrustBar'
+        | 'componentPanelShowcase';
     props: HeroProps | ItemsShowcaseProps | TrustBarProps;
 }
 
@@ -23,6 +27,9 @@ interface Item {
     image: string | undefined;
 }
 
+export interface PanelShowcaseProps {
+    items: Item[];
+}
 export interface ItemsShowcaseProps {
     items: Item[];
 }
